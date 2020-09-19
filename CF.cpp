@@ -18,7 +18,7 @@ const long mod=1e9+7;
 #define mem( a, val ) memset(a, val, sizeof( a ) )
 #define deci( x ) cout<<fixed<<setprecision( x );
 
-void solve() {
+void solve1() {
 	// string s = "We are at Ignite Solutions! Their email-id is careers@ignit.com";
 	string s;
 	getline(cin, s);
@@ -60,6 +60,42 @@ void solve() {
 
 }
 
+void solve() {
+	
+	int n;
+	cin >> n;
+	vector<int> p(n, 0);
+	vector<int> mp(n, 0);
+
+	// if(n == 1)
+	// 	return 0;
+	int a;
+	for(int i = 0; i < n; i++) {
+		cin >> a;
+		p[i] = a;
+	}
+	mp[n-1] = p[n-1];
+	for(int i = n-2; i >= 0; i--) {
+		mp[i] = max(mp[i+1], p[i]);
+	}
+
+	for (int i = 0; i < n; ++i)
+	{
+		cout << p[i] << " ";
+	}
+	cout << nl;
+	for (int i = 0; i < n; ++i)
+	{
+		cout << mp[i] << " ";
+	}
+	int ans = 0;
+
+	for(int i = 0; i < n; i++) {
+		ans = max(ans, mp[i] - p[i]);
+	}
+
+	cout << nl << ans;
+}
 int main() {
     timesaver;
     // int n;
