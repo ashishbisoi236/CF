@@ -62,39 +62,43 @@ void solve1() {
 
 void solve() {
 	
-	int n;
-	cin >> n;
-	vector<int> p(n, 0);
-	vector<int> mp(n, 0);
+	int high, low;
+	cin >> low >> high;
+	vector<int> ans;
 
-	// if(n == 1)
-	// 	return 0;
-	int a;
-	for(int i = 0; i < n; i++) {
-		cin >> a;
-		p[i] = a;
-	}
-	mp[n-1] = p[n-1];
-	for(int i = n-2; i >= 0; i--) {
-		mp[i] = max(mp[i+1], p[i]);
+	string dig = "123456789";
+	int lDig = 0, hDig = 0;
+
+	int temp = low;
+	while(temp) {
+		lDig++;
+		temp = temp / 10;
 	}
 
-	for (int i = 0; i < n; ++i)
+	temp = high;
+	while(temp) {
+		hDig++;
+		temp = temp / 10;
+	}
+
+	cout << lDig << " " << hDig << nl;
+
+	while(lDig <= hDig) {
+		int i = 0, j = lDig;
+		while(i + j <= 9) {
+			temp = stoi(dig.substr(i, j));
+			// cout << temp << " ";
+			if(temp >= low && temp <= high)
+				ans.push_back(temp);
+			i++;
+		}
+		lDig++;
+	}
+	// int a;
+	for (int i = 0; i < ans.size(); ++i)
 	{
-		cout << p[i] << " ";
+		cout << ans[i] << " ";
 	}
-	cout << nl;
-	for (int i = 0; i < n; ++i)
-	{
-		cout << mp[i] << " ";
-	}
-	int ans = 0;
-
-	for(int i = 0; i < n; i++) {
-		ans = max(ans, mp[i] - p[i]);
-	}
-
-	cout << nl << ans;
 }
 int main() {
     timesaver;
