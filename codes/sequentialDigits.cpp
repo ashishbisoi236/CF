@@ -33,6 +33,8 @@ public:
     }
 };
 
+// https://leetcode.com/problems/sequential-digits/discuss/854043/C%2B%2B-readable-algorithm-%2B-explanation
+
 // Efficient solution
 
 class Solution {
