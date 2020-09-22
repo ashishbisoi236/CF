@@ -60,50 +60,71 @@ void solve1() {
 
 }
 
-void solve() {
-	
-	int high, low;
-	cin >> low >> high;
-	vector<int> ans;
-
-	string dig = "123456789";
-	int lDig = 0, hDig = 0;
-
-	int temp = low;
-	while(temp) {
-		lDig++;
-		temp = temp / 10;
-	}
-
-	temp = high;
-	while(temp) {
-		hDig++;
-		temp = temp / 10;
-	}
-
-	cout << lDig << " " << hDig << nl;
-
-	while(lDig <= hDig) {
-		int i = 0, j = lDig;
-		while(i + j <= 9) {
-			temp = stoi(dig.substr(i, j));
-			// cout << temp << " ";
-			if(temp >= low && temp <= high)
-				ans.push_back(temp);
-			i++;
-		}
-		lDig++;
-	}
-	// int a;
-	for (int i = 0; i < ans.size(); ++i)
-	{
-		cout << ans[i] << " ";
-	}
+bool comp(vector<int> trip1, vector<int> trip2) {
+	return trip1[1] < trip2[1];
 }
+
+bool solve(int n) {
+	vector<vector<int>> trip(n, vector<int>(3));
+	for(int i = 0; i < n; i++) {
+		cin >> trip[i][0] >> trip[i][1] >> trip[i][2];
+	}
+	cout << nl;
+	for(int i = 0; i < n; i++) {
+		cout << trip[i][0] << " " << trip[i][1] << " " << trip[i][2] << nl;
+	}
+	cout << nl;
+	int capacity;
+	cin >> capacity;
+
+	sort(trip.begin(), trip.end(), comp);
+
+	cout << nl;
+	for(int i = 0; i < n; i++) {
+		cout << trip[i][0] << " " << trip[i][1] << " " << trip[i][2] << nl;
+	}
+	cout << nl;
+	
+	int fCap = 0, lStart = 0, lEnd = 0;
+	map<int, vector<int>> m;
+	m[trip[0][2]].push_back(0);
+	fCap = trip[0][0];
+
+	
+	for(int i = 1; i < n; i++) {
+		if(m.find(trip[i][1]) != m.end()) {
+			for(int i = 0; i < m[trip[i][1]].size(); i++)
+				fCap -= trip[m[trip[i][1]][i]][0];
+		}
+
+		fCap += trip[i][0];
+		m[trip[i][2]].push_back(i);
+
+		if(fCap > capacity)
+			return false;
+		cout << fCap;
+		// if(fCap + trip)
+		// fCap += trip[i][0];
+		// lStart = trip[i][1];
+		// lEnd = trip[i][2];
+
+	}
+
+	return true;
+
+}
+
+
+
 int main() {
-    timesaver;
+    // timesaver;
     // int n;
-    solve();
-    
+    // solve();
+	int n;
+	cin >> n;
+	if(solve(n))
+		cout << "true";
+	else
+		cout << "false";
 	return 0;
 } 
