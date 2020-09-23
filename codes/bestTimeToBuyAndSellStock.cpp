@@ -4,6 +4,7 @@ public:
         int n = p.size();
         if(n == 1 or n == 0)
         	return 0;
+        // max profit from tha day onwards
         vector<int> mp(n, 0);
         mp[n-1] = p[n-1];
         for(int i = n-2; i >= 0; i--) {
