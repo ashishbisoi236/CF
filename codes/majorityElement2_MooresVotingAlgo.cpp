@@ -4,7 +4,7 @@ class Solution {
 public:
     vector<int> majorityElement(vector<int>& nums) {
          int count1 = 0;
-        int element1,element2;
+        int element1 = INT_MAX,element2 = INT_MAX;
         int count2=0;
         for(int i =0;i<nums.size();i++)
         {
