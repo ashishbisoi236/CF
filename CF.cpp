@@ -65,44 +65,20 @@ bool comp(vector<int> trip1, vector<int> trip2) {
 }
 
 void solve() {
-	int n;
-	cin >> n;
-	vector<int> v(n, 0);
-	for (int i = 0; i < n; ++i)
-	{
-		cin >> v[i];
-	}
-	sort(v.begin(), v.end());
-
-	for (int i = 0; i < n; ++i)
-	{
-		cout << v[i];
-	}
-	cout << nl;
-	vector<int> ans;
-	for(int i = 0; i < n;) {
-		int j = i+1;
-		cout << "j " << j << nl;
-		while(j < n && v[j] == v[i]) {
-			j++;
-		}
-
-		cout << j << " " << i << nl;
-		if((j - i) >= n/3 + 1){
-			ans.push_back(v[i]);
-			
-		}
-		i = j;
-	}
-
-
-	
-	cout << nl;
-	for(int i = 0; i < ans.size(); i++){
-		cout << ans[i] << " ";
-	}
 
 }
+
+class Solution {
+public:
+    char findTheDifference(string s, string t) {
+        int len = s.size();
+        int ans = 0;
+        for(int i = 0; i < len; i++)
+            ans += s[i] - t[i];
+        
+        return char(ans + t[len]);
+    }
+};
 
 
 
@@ -110,6 +86,8 @@ int main() {
     // timesaver;
     // int n;
     // solve();
-	solve();
+	// solve();
+	string s1 = "210", s2 = "102";
+	cout << (s1+s2) >= (s2+s1);
 	return 0;
 } 
