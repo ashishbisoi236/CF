@@ -79,11 +79,52 @@ const long mod=1e9+7;
 
 
 void solve() {
+	int n;
+	cin >> n;
+	vector<int> v(n);
+	for(int i = 0; i < n; i++)
+		cin >> v[i];
 
+	for (int i = 0; i < n; ++i)
+	{
+		if(v[i] <= 0 || v[i] > n)
+			v[i] = n+1;
+	}
+
+	for (int i = 0; i < n; ++i)
+		{
+			cout << v[i] << " ";
+		}
+		cout << nl;
+
+	for(int i = 0; i < n; i++) {
+		int num = abs(v[i]);
+		if(num > n) continue;
+		num--;
+		if(v[num] > 0) {
+			v[num] = -1 * v[num];
+		}
+
+		// print the array
+		for (int i = 0; i < n; ++i)
+		{
+			cout << v[i] << " ";
+		}
+		cout << nl;
+	}
+
+	for (int i = 0; i < n; ++i)
+	{
+		if(v[i] > 0){
+			cout << i + 1;
+			break;
+		}
+	}
+	cout << "jk" << n + 1;
 }
 
 int main() {
     timesaver;
-    
+    solve();
 	return 0;
 } 
