@@ -19,65 +19,6 @@ const long mod=1e9+7;
 #define mem( a, val ) memset(a, val, sizeof( a ) )
 #define deci( x ) cout<<fixed<<setprecision( x );
 
-// void solve1() {
-// 	// string s = "We are at Ignite Solutions! Their email-id is careers@ignit.com";
-// 	string s;
-// 	getline(cin, s);
-// 	string ans = "";
-// 	// cin >> s;
-// 	cout << s;
-
-// 	int len = s.size();
-// 	int i = 0, j = 0, k = 0;
-// 	cout << len << nl;
-
-// 	while(k < len) {
-// 		if(isalpha(s[k]) || s[k] == '-')
-// 			j++;
-// 		else if(j != i){
-// 			j -= 1;
-// 			while(j >= i) {
-// 				ans += s[j];
-// 				j--;
-// 			}
-// 			ans += s[k];
-// 			i = k + 1;
-// 			j = k + 1;
-// 		}
-// 		else {
-// 			i = k + 1;
-// 			j = k + 1;
-// 		}
-// 		k++;
-// 	}
-
-// 	j -= 1;
-// 	while(j >= i) {
-// 				ans += s[j];
-// 				j--;
-// 			}
-
-// 	cout << ans;
-
-// }
-
-// bool comp(vector<int> trip1, vector<int> trip2) {
-// 	return trip1[1] < trip2[1];
-// }
-
-
-// class Solution {
-// public:
-//     char findTheDifference(string s, string t) {
-//         int len = s.size();
-//         int ans = 0;
-//         for(int i = 0; i < len; i++)
-//             ans += s[i] - t[i];
-        
-//         return char(ans + t[len]);
-//     }
-// };
-
 
 void solve2() {
 	int n;
@@ -285,33 +226,37 @@ void solve(int n, int d) {
 	}
 }
 
-string encrypt(string words) {
-    // Participant's code will go here
-    int len = 0;
-    string t = "";
-    for(int i = 0; i < words.size(); i++)
-        if(words[i] != ' ') {
-            len++;
-            t += words[i];
-        }
 
-    int c = ceil(sqrt(len));
-    int f = floor(sqrt(len));
-    if(c*f < len)
-        f = c;
-    string ans = "";
-    int k = 0;
-    for(int i = 0; i < f; i++) {
-        for(int j = 0; j < c; j++) {
-            if(k == len)
-            	break;
-            ans += t[k];
-            k++;
-        }
-        ans += "\n";
-    }    
-    return ans;
+void sol(string s, vector<int>sI, vector<int>eI){
+	int len = sI.size();
+	int stars = 0, start, ans;
+	for(int i = 0; i < len; i++){
+		stars = 0;
+		start = 0;
+		ans = 0;
+		for(int j = sI[i]-1; j < eI[i]; j++){
+			if(s[j] == '|'){
+				if(start == 0)
+					start++;
+				else if(start == 1){
+					ans += stars;
+					stars = 0;
+				}
+
+			}
+			else{
+				if(start == 0)
+					continue;
+				else if(start == 1)
+					stars++;
+			}
+		}
+
+		cout << ans << " ";
+	}
+
 }
+
 
 int main() {
     timesaver;
@@ -325,8 +270,14 @@ int main() {
 
     // int p = 6, d = 2;
     // solve(p, d);
-    string a = "its harder to read code than to write it";
-    cout << encrypt(a);
+    vector<int> sI, eI;
+    sI.push_back(1);
+    // sI.push_back(1);
+    eI.push_back(3);
+    // eI.push_back(5);
+
+    string a = "*|*|";
+    sol(a, sI, eI);
 	return 0;
 } 
 
